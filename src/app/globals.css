@@ -1,0 +1,467 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #070c16;
+  --color-elevated: #0d1628;
+  --color-card: #0a1220;
+  --color-accent: #38bdf8;
+  --color-accent-hover: #0ea5e9;
+  --color-muted: #64748b;
+  --color-border: #1e3350;
+
+  --font-heading: var(--font-oswald);
+  --font-sans: var(--font-inter);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #070c16;
+  color: #ffffff;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: #38bdf8;
+  color: #070c16;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+::-webkit-scrollbar-track {
+  background: #070c16;
+}
+::-webkit-scrollbar-thumb {
+  background: #38bdf8;
+}
+
+/* Hard red shadow utility */
+.shadow-red {
+  box-shadow: 4px 4px 0 #38bdf8;
+}
+.shadow-red-sm {
+  box-shadow: 2px 2px 0 #38bdf8;
+}
+
+/* Section label style */
+.section-label {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #38bdf8;
+}
+
+/* Red diagonal hero accent */
+.hero-diagonal {
+  position: absolute;
+  right: -10%;
+  top: 0;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent 40%, rgba(255, 45, 45, 0.06) 100%);
+  pointer-events: none;
+}
+
+/* =============================================
+   PARALLAX HERO — entrance animations
+   ============================================= */
+
+@keyframes phFadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ph-anim {
+  animation: phFadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+.ph-d1 { animation-delay: 0.10s; }
+.ph-d2 { animation-delay: 0.25s; }
+.ph-d3 { animation-delay: 0.40s; }
+.ph-d4 { animation-delay: 0.52s; }
+.ph-d5 { animation-delay: 0.62s; }
+.ph-d6 { animation-delay: 0.72s; }
+
+/* =============================================
+   PARALLAX HERO
+   ============================================= */
+
+.parallax {
+  position: relative;
+  background: #111111;
+}
+
+.parallax__header {
+  position: relative;
+  height: 250vh;
+}
+
+.parallax__visuals {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100svh;
+  overflow: hidden;
+}
+
+/* Covers the very top so navbar blends cleanly */
+.parallax__black-line-overflow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: linear-gradient(to bottom, #111111 0%, transparent 100%);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.parallax__layers {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Full-bleed image layers — oversized top/bottom so parallax has room to travel */
+.parallax__layer-img {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 100%;
+  height: 140%;
+  object-fit: cover;
+}
+
+/* Same oversized geometry for CSS overlay layers */
+.parallax__layer-stretch {
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 100%;
+  height: 140%;
+}
+
+.parallax__layer-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  text-align: center;
+  padding: 0 1.5rem;
+  gap: 0;
+}
+
+.parallax__eyebrow {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #38bdf8;
+  margin-bottom: 1.75rem;
+}
+
+.parallax__title {
+  font-family: var(--font-oswald), sans-serif;
+  font-weight: 700;
+  font-size: clamp(3.5rem, 12vw, 11rem);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.88;
+  color: #ffffff;
+  text-shadow: 0 4px 80px rgba(0, 0, 0, 0.6);
+}
+
+.parallax__title span {
+  display: block;
+  background: linear-gradient(135deg, #ffffff 0%, #ffffff 35%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.parallax__ctas {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.parallax__ctas a {
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.875rem 2rem;
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.parallax__ctas a:first-child {
+  background: #38bdf8;
+  color: #ffffff;
+  box-shadow: 4px 4px 0 rgba(255, 45, 45, 0.35);
+}
+
+.parallax__ctas a:first-child:hover {
+  background: #e52020;
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 rgba(255, 45, 45, 0.35);
+}
+
+.parallax__ctas a:last-child {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.parallax__ctas a:last-child:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Bottom gradient: parallax fades into the dark page */
+.parallax__fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(17, 17, 17, 0.6) 55%,
+    #111111 100%
+  );
+  z-index: 8;
+  pointer-events: none;
+}
+
+/* Bridge / intro section */
+.parallax__content {
+  background: #111111;
+  position: relative;
+  z-index: 10;
+}
+
+.parallax__intro {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 6rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.parallax__intro-line {
+  width: 3rem;
+  height: 2px;
+  background: #38bdf8;
+}
+
+.parallax__intro-text {
+  font-size: 1.125rem;
+  color: #888888;
+  line-height: 1.75;
+}
+
+.parallax__scroll-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: #444444;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.2s;
+  margin-top: 0.5rem;
+}
+
+.parallax__scroll-hint:hover {
+  color: #888888;
+}
+
+.parallax__scroll-hint svg {
+  width: 1rem;
+  height: 1rem;
+  animation: bounceDown 2s ease-in-out infinite;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes scrollDot {
+  0%   { transform: translateY(0);    opacity: 1; }
+  55%  { transform: translateY(10px); opacity: 0; }
+  56%  { transform: translateY(0);    opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+
+/* =============================================
+   BENTO GRID — Cybernetic glow cards
+   ============================================= */
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-item-hero {
+    grid-column: span 2 !important;
+    grid-row: span 1 !important;
+    min-height: auto !important;
+  }
+}
+
+@media (max-width: 580px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-item-hero,
+  .bento-item-wide {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+}
+
+.bento-item {
+  position: relative;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  padding: 2rem;
+  transition: border-color 0.35s;
+}
+
+.bento-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    700px circle at var(--mouse-x, -300px) var(--mouse-y, -300px),
+    rgba(56, 189, 248, 0.07) 0%,
+    transparent 55%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bento-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid transparent;
+  background:
+    radial-gradient(
+      350px circle at var(--mouse-x, -300px) var(--mouse-y, -300px),
+      rgba(56, 189, 248, 0.22) 0%,
+      transparent 60%
+    )
+    border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bento-item:hover {
+  border-color: rgba(56, 189, 248, 0.16);
+}
+
+.bento-item-hero {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height: 340px;
+}
+
+/* =============================================
+   SPOTLIGHT / GLOW CARDS
+   ============================================= */
+
+[data-glow]::before,
+[data-glow]::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: calc(var(--border-size) * -1);
+  border: var(--border-size) solid transparent;
+  border-radius: calc(var(--radius) * 1px);
+  background-attachment: fixed;
+  background-size: calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)));
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+  mask-clip: padding-box, border-box;
+  mask-composite: intersect;
+}
+
+[data-glow]::before {
+  background-image: radial-gradient(
+    calc(var(--spotlight-size) * 0.75) calc(var(--spotlight-size) * 0.75) at
+    calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+    hsl(var(--hue, 199) calc(var(--saturation, 100) * 1%) calc(var(--lightness, 65) * 1%) / var(--border-spot-opacity, 1)), transparent 100%
+  );
+  filter: brightness(3);
+}
+
+[data-glow]::after {
+  background-image: radial-gradient(
+    calc(var(--spotlight-size) * 0.5) calc(var(--spotlight-size) * 0.5) at
+    calc(var(--x, 0) * 1px) calc(var(--y, 0) * 1px),
+    hsl(0 100% 100% / var(--border-light-opacity, 1)), transparent 100%
+  );
+}
+
+[data-glow] > [data-glow] {
+  position: absolute;
+  inset: 0;
+  will-change: filter;
+  opacity: var(--outer, 1);
+  border-radius: calc(var(--radius) * 1px);
+  border-width: calc(var(--border-size) * 20);
+  filter: blur(calc(var(--border-size) * 10));
+  background: none;
+  pointer-events: none;
+  border: none;
+}
