@@ -73,12 +73,6 @@ export default function Navbar() {
             >
               Connexion
             </Link>
-            <Link href="/dashboard" style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.72)", textDecoration: "none", transition: "color 0.15s", whiteSpace: "nowrap" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#ffffff")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.72)")}
-            >
-              Espace client
-            </Link>
             <a href="/#contact" style={{
               display: "inline-flex", alignItems: "center", gap: "0.4rem", flexShrink: 0,
               background: "linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%)",
@@ -126,13 +120,6 @@ export default function Navbar() {
                 {l.label}
               </Link>
             ))}
-            <Link
-              href="/dashboard"
-              onClick={() => setOpen(false)}
-              className="text-sm font-medium text-muted hover:text-white uppercase tracking-wider transition-colors"
-            >
-              Espace client
-            </Link>
             <a
               href="/#contact"
               onClick={() => setOpen(false)}
