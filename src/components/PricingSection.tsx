@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Check, Zap, Shield, ArrowRight, Users, TrendingUp } from "lucide-react";
+import { Check, Zap, ArrowRight, Users, TrendingUp } from "lucide-react";
 import Link from "next/link";
 
 const SPOTS_TOTAL = 10;
-const SPOTS_TAKEN = 7;
+const SPOTS_TAKEN = 8;
 const SPOTS_LEFT = SPOTS_TOTAL - SPOTS_TAKEN;
 
 const INCLUS = [
@@ -47,7 +47,7 @@ export default function PricingSection() {
             CE QUE LES AUTRES FACTURENT<br />
             <span style={{ color: "#38bdf8", textShadow: "0 0 30px rgba(56,189,248,0.35)" }}>300€/MOIS,</span>{" "}
             <span style={{ color: "rgba(255,255,255,0.4)" }}>TOI</span>{" "}
-            <span style={{ color: "#ffffff" }}>59€</span>
+            <span style={{ color: "#ffffff" }}>69€</span>
           </h2>
           <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.45)", maxWidth: "30rem", margin: "0 auto", lineHeight: 1.75 }}>
             Un coach perso en salle coûte 60€ <em>la séance</em>. Ici, tu as un coaching complet, personnalisé et suivi chaque semaine — pour moins cher qu&apos;un abonnement Netflix Premium.
@@ -84,7 +84,7 @@ export default function PricingSection() {
                     <p style={{ fontSize: "0.7rem", color: "rgba(56,189,248,0.7)" }}>Tout inclus · Suivi perso complet</p>
                   </div>
                   <div style={{ textAlign: "right", marginLeft: "1rem" }}>
-                    <span style={{ fontFamily: "var(--font-oswald)", fontSize: "1rem", fontWeight: 700, color: "#38bdf8" }}>59€/mois</span>
+                    <span style={{ fontFamily: "var(--font-oswald)", fontSize: "1rem", fontWeight: 700, color: "#38bdf8" }}>69€/mois</span>
                   </div>
                 </div>
               </div>
@@ -112,17 +112,6 @@ export default function PricingSection() {
               </div>
             </div>
 
-            {/* Guarantee */}
-            <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem", padding: "1.25rem 1.1rem", background: "rgba(56,189,248,0.04)", border: "1px solid rgba(56,189,248,0.12)", borderRadius: "1rem" }}>
-              <div style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(56,189,248,0.1)", border: "1px solid rgba(56,189,248,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                <Shield size={16} style={{ color: "#38bdf8" }} />
-              </div>
-              <div>
-                <p style={{ fontSize: "0.82rem", color: "#ffffff", fontWeight: 700, marginBottom: "0.25rem" }}>Satisfait ou remboursé — 7 jours</p>
-                <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.4)", lineHeight: 1.6 }}>Tu démarres, tu vois la valeur. Si dans la première semaine tu n&apos;es pas convaincu, on rembourse sans question.</p>
-              </div>
-            </div>
-
           </div>
 
           {/* Right: pricing card */}
@@ -143,15 +132,15 @@ export default function PricingSection() {
                 <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", marginBottom: "0.4rem" }}>
                   <div style={{ display: "flex", alignItems: "flex-start", lineHeight: 1 }}>
                     <span style={{ fontFamily: "var(--font-oswald)", fontSize: "1.2rem", fontWeight: 700, color: "#38bdf8", marginTop: "0.65rem" }}>€</span>
-                    <span style={{ fontFamily: "var(--font-oswald)", fontSize: "5rem", fontWeight: 700, color: "#ffffff", letterSpacing: "-0.04em", lineHeight: 1 }}>59</span>
+                    <span style={{ fontFamily: "var(--font-oswald)", fontSize: "5rem", fontWeight: 700, color: "#ffffff", letterSpacing: "-0.04em", lineHeight: 1 }}>69</span>
                   </div>
                   <div>
-                    <div style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.38)", textDecoration: "line-through" }}>97€</div>
+                    <div style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.38)", textDecoration: "line-through" }}>138€</div>
                     <div style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.35)" }}>/ mois</div>
                   </div>
                 </div>
                 <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.35)", lineHeight: 1.6 }}>
-                  Ce tarif est réservé aux premiers clients. Le prix monte à <strong style={{ color: "rgba(255,255,255,0.55)" }}>97€/mois</strong> une fois les places complètes.
+                  Ce tarif est réservé aux premiers clients. Le prix monte à <strong style={{ color: "rgba(255,255,255,0.55)" }}>138€/mois</strong> une fois les places complètes.
                 </p>
               </div>
 
@@ -159,11 +148,11 @@ export default function PricingSection() {
               <div style={{ marginBottom: "1.75rem", padding: "1rem 1.1rem", background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)", borderRadius: "0.85rem" }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.6rem" }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
-                    <Users size={13} style={{ color: "#38bdf8" }} />
-                    <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.6)", fontWeight: 500 }}>{SPOTS_TAKEN} clients actifs</span>
+                    <Users size={13} style={{ color: "#f87171" }} />
+                    <span style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.6)", fontWeight: 500 }}>Places à ce tarif</span>
                   </div>
-                  <span style={{ fontSize: "0.72rem", fontWeight: 700, color: SPOTS_LEFT <= 3 ? "#f87171" : "#38bdf8" }}>
-                    {SPOTS_LEFT} place{SPOTS_LEFT > 1 ? "s" : ""} restante{SPOTS_LEFT > 1 ? "s" : ""}
+                  <span style={{ fontSize: "0.72rem", fontWeight: 700, color: "#f87171" }}>
+                    {SPOTS_LEFT} places restantes
                   </span>
                 </div>
                 <div style={{ height: "5px", background: "rgba(255,255,255,0.07)", borderRadius: "9999px", overflow: "hidden" }}>
@@ -203,13 +192,13 @@ export default function PricingSection() {
                   href="/signup"
                   style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.6rem", padding: "1.1rem", background: "linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%)", color: "#03090f", fontWeight: 900, fontSize: "0.82rem", letterSpacing: "0.1em", textTransform: "uppercase", borderRadius: "1rem", textDecoration: "none", boxShadow: ctaHovered ? "0 8px 40px rgba(56,189,248,0.65), inset 0 1px 0 rgba(255,255,255,0.35)" : "0 4px 28px rgba(56,189,248,0.42), inset 0 1px 0 rgba(255,255,255,0.3)", transition: "box-shadow 0.2s" }}
                 >
-                  Je commence à 59€/mois <ArrowRight size={15} />
+                  Je commence à 69€/mois <ArrowRight size={15} />
                 </Link>
               </motion.div>
 
               {/* Sub-cta line */}
               <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.25rem", marginTop: "1rem" }}>
-                {["Sans engagement", "7j satisfait ou remboursé", "Résiliation libre"].map((t) => (
+                {["Sans engagement", "Résiliation à tout moment", "Prise en charge immédiate"].map((t) => (
                   <span key={t} style={{ fontSize: "0.63rem", color: "rgba(255,255,255,0.22)", display: "flex", alignItems: "center", gap: "0.3rem", whiteSpace: "nowrap" }}>
                     <TrendingUp size={9} style={{ color: "rgba(56,189,248,0.4)", flexShrink: 0 }} />
                     {t}
