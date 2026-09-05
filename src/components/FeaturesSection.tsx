@@ -191,7 +191,7 @@ export default function FeaturesSection() {
       <div style={{ maxWidth: "1280px", margin: "0 auto", padding: "0 1.5rem", position: "relative", zIndex: 1 }}>
 
         {/* Header — two column */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "4rem", alignItems: "flex-end", marginBottom: "4rem" }}>
+        <div className="features-header-grid">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -222,6 +222,7 @@ export default function FeaturesSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.7, ease: easing, delay: 0.15 }}
+            className="features-desc"
             style={{
               fontSize: "0.9rem", color: "rgba(255,255,255,0.65)", lineHeight: 1.85,
               borderLeft: "1px solid rgba(255,255,255,0.08)",

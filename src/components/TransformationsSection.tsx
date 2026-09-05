@@ -160,15 +160,8 @@ export default function TransformationsSection() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: direction * -80 }}
               transition={{ duration: 0.42, ease: easing }}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "280px 1fr",
-                borderRadius: "1.5rem",
-                overflow: "hidden",
-                border: "1px solid rgba(255,255,255,0.08)",
-                boxShadow: "0 40px 100px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.07)",
-                minHeight: "320px",
-              }}
+              className="testimonial-card-grid"
+              style={{ }}
             >
               {/* Left panel — identity */}
               <div style={{

@@ -97,7 +97,7 @@ export default function ContactSection() {
             padding: '2.5rem',
           }}>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                <div className="name-fields-grid">
                   {[{ label: 'Prénom *', placeholder: 'Alex', type: 'text' }, { label: 'Nom *', placeholder: 'Martin', type: 'text' }].map((f) => (
                     <div key={f.label}>
                       <label style={{ display: 'block', fontSize: '0.65rem', textTransform: 'uppercase', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.65)', marginBottom: '0.5rem' }}>

@@ -132,7 +132,7 @@ export default function PricingSection() {
                 <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem", marginBottom: "0.4rem" }}>
                   <div style={{ display: "flex", alignItems: "flex-start", lineHeight: 1 }}>
                     <span style={{ fontFamily: "var(--font-oswald)", fontSize: "1.2rem", fontWeight: 700, color: "#38bdf8", marginTop: "0.65rem" }}>€</span>
-                    <span style={{ fontFamily: "var(--font-oswald)", fontSize: "5rem", fontWeight: 700, color: "#ffffff", letterSpacing: "-0.04em", lineHeight: 1 }}>69</span>
+                    <span style={{ fontFamily: "var(--font-oswald)", fontSize: "clamp(3.5rem, 12vw, 5rem)", fontWeight: 700, color: "#ffffff", letterSpacing: "-0.04em", lineHeight: 1 }}>69</span>
                   </div>
                   <div>
                     <div style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.38)", textDecoration: "line-through" }}>138€</div>

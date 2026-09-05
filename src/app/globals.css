@@ -416,6 +416,65 @@ body {
 }
 
 /* =============================================
+   MOBILE-RESPONSIVE LAYOUT HELPERS
+   ============================================= */
+
+.features-header-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 640px) {
+  .features-header-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.testimonial-card-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.07);
+  min-height: 320px;
+}
+
+@media (max-width: 680px) {
+  .testimonial-card-grid {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+}
+
+.name-fields-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .name-fields-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reduce excessive section padding on mobile */
+@media (max-width: 640px) {
+  .features-desc {
+    border-left: none !important;
+    padding-left: 0 !important;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem;
+  }
+}
+
+/* =============================================
    SPOTLIGHT / GLOW CARDS
    ============================================= */
 
