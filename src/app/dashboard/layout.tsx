@@ -29,7 +29,7 @@ const navGroups: { label: string; links: NavLink[] }[] = [
   },
 ];
 
-const mockClient = { name: "Thomas R.", initials: "TR", program: "Hypertrophie Intermédiaire", week: 1 };
+const mockClient = { program: "Hypertrophie Intermédiaire", week: 1 };
 
 const tourIds: Record<string, string> = {
   "/dashboard": "tour-nav-dashboard",
@@ -45,6 +45,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [clientAvatar, setClientAvatar] = useState<string | null>(null);
   const [tourKey, setTourKey] = useState(0);
+  const [clientName, setClientName] = useState("");
+  const [clientInitials, setClientInitials] = useState("?");
 
   function handleReplayTour() {
     localStorage.removeItem("bp_tour_complete");
@@ -53,6 +55,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   }
 
   useEffect(() => {
+    try {
+      const user = JSON.parse(localStorage.getItem("bp_current_user") || "{}");
+      if (user.firstName) {
+        const fn = user.firstName.trim();
+        const ln = (user.lastName || "").trim();
+        setClientName(ln ? `${fn} ${ln.charAt(0)}.` : fn);
+        setClientInitials(`${fn.charAt(0)}${ln ? ln.charAt(0) : ""}`.toUpperCase());
+      }
+    } catch { /* */ }
     try {
       for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
@@ -348,12 +359,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 fontFamily: "var(--font-oswald)", fontWeight: 700, fontSize: "0.88rem", color: "#38bdf8",
                 boxShadow: "inset 0 1px 0 rgba(255,255,255,0.2), 0 0 14px rgba(56,189,248,0.2)",
               }}>
-                {mockClient.initials}
+                {clientInitials}
               </div>
             )}
 
             <div style={{ flex: 1, minWidth: 0 }}>
-              <p style={{ fontSize: "0.88rem", fontWeight: 600, color: "#ffffff", lineHeight: 1 }}>{mockClient.name}</p>
+              <p style={{ fontSize: "0.88rem", fontWeight: 600, color: "#ffffff", lineHeight: 1 }}>{clientName || "Mon espace"}</p>
               <p style={{
                 fontSize: "0.72rem", color: "rgba(255,255,255,0.3)", marginTop: "0.22rem",
                 whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",

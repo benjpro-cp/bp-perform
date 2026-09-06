@@ -207,7 +207,7 @@ export default function DietePage() {
               <span style={{ color: "#fb923c", textShadow: "0 0 20px rgba(251,146,60,0.45)" }}>en temps réel</span>
             </h2>
             <p style={{ fontSize: "0.88rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.6, maxWidth: "38rem", marginBottom: "1.1rem" }}>
-              Baptiste a préparé vos objectifs ci-dessous — pour scanner vos aliments et suivre vos macros au quotidien, on vous recommande notre appli partenaire.{" "}
+              Paul a préparé vos objectifs ci-dessous — pour scanner vos aliments et suivre vos macros au quotidien, on vous recommande notre appli partenaire.{" "}
               <span style={{ color: "rgba(255,255,255,0.65)" }}>Tout est calé sur vos objectifs personnalisés.</span>
             </p>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.6rem", marginBottom: "1.25rem" }}>
@@ -358,7 +358,7 @@ export default function DietePage() {
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.6rem", position: "relative" }}>
               <div style={{ width: "26px", height: "26px", borderRadius: "50%", background: "linear-gradient(135deg, rgba(56,189,248,0.25), rgba(56,189,248,0.06))", border: "1.5px solid rgba(56,189,248,0.35)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-oswald)", fontWeight: 700, fontSize: "0.68rem", color: "#38bdf8", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.2)" }}>BP</div>
               <div>
-                <p style={{ fontSize: "0.8rem", fontWeight: 600, color: "#ffffff", lineHeight: 1 }}>Baptiste P.</p>
+                <p style={{ fontSize: "0.8rem", fontWeight: 600, color: "#ffffff", lineHeight: 1 }}>Paul</p>
                 <p style={{ fontSize: "0.67rem", color: "rgba(255,255,255,0.25)", marginTop: "0.1rem" }}>Note nutrition</p>
               </div>
             </div>
@@ -393,7 +393,7 @@ export default function DietePage() {
             <span style={{ color: "#fb923c", textShadow: "0 0 24px rgba(251,146,60,0.5)" }}>régaler</span>
           </h2>
           <p style={{ fontSize: "0.9rem", color: "rgba(255,255,255,0.42)", lineHeight: 1.65, maxWidth: "36rem", marginBottom: "1.5rem" }}>
-            Baptiste prépare pour vous des recettes protéinées, gourmandes et calibrées sur vos macros — disponibles très prochainement dans votre espace.
+            Paul prépare pour vous des recettes protéinées, gourmandes et calibrées sur vos macros — disponibles très prochainement dans votre espace.
           </p>
 
           {/* Ghost category chips */}
@@ -409,7 +409,7 @@ export default function DietePage() {
           <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
             <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "linear-gradient(135deg, rgba(251,146,60,0.28), rgba(251,146,60,0.08))", border: "1.5px solid rgba(251,146,60,0.32)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-oswald)", fontWeight: 700, fontSize: "0.68rem", color: "#fb923c", boxShadow: "inset 0 1px 0 rgba(255,255,255,0.18)" }}>BP</div>
             <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.28)", fontStyle: "italic" }}>
-              Recettes conçues par Baptiste P. · adaptées à vos objectifs
+              Recettes conçues par Paul · adaptées à vos objectifs
             </p>
           </div>
         </div>

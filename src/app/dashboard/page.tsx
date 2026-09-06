@@ -615,7 +615,7 @@ export default function DashboardPage() {
               </div>
               <div>
                 <div style={{ display: "flex", alignItems: "baseline", gap: "0.4rem", marginBottom: "0.3rem" }}>
-                  <p style={{ fontSize: "0.8rem", fontWeight: 600, color: "#ffffff" }}>Baptiste P.</p>
+                  <p style={{ fontSize: "0.8rem", fontWeight: 600, color: "#ffffff" }}>Paul</p>
                   <span style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.18)" }}>Aujourd'hui</span>
                 </div>
                 <p style={{ fontSize: "0.73rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.65 }}>

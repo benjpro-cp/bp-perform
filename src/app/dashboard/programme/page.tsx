@@ -26,7 +26,7 @@ type Day = {
 
 const program = {
   name: "Hypertrophie Intermédiaire",
-  week: 8, totalWeeks: 12, coach: "Baptiste P.",
+  week: 8, totalWeeks: 12, coach: "Paul",
   days: [
     {
       id: "lundi", day: "Lun", fullDay: "Lundi", type: "Push", duration: "~55 min",
