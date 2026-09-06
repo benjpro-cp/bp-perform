@@ -49,10 +49,12 @@ export default function SignupPage() {
       try {
         const prospects = JSON.parse(localStorage.getItem("bp_prospects") || "[]");
         const already = prospects.find((p: { email: string }) => p.email.toLowerCase() === form.email.toLowerCase());
+        const userData = { firstName: form.firstName.trim(), lastName: form.lastName.trim(), email: form.email.trim().toLowerCase(), goal: form.goal };
         if (!already) {
-          prospects.push({ id: genId(), firstName: form.firstName.trim(), lastName: form.lastName.trim(), email: form.email.trim().toLowerCase(), phone: form.phone.trim(), goal: form.goal, status: "email", createdAt: new Date().toISOString() });
+          prospects.push({ id: genId(), ...userData, phone: form.phone.trim(), status: "email", createdAt: new Date().toISOString() });
           localStorage.setItem("bp_prospects", JSON.stringify(prospects));
         }
+        localStorage.setItem("bp_current_user", JSON.stringify(userData));
         setDone(true);
       } catch { setError("Une erreur est survenue."); }
       setLoading(false);

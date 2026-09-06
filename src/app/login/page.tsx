@@ -15,7 +15,16 @@ export default function LoginPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
+    const email = (e.currentTarget.elements.namedItem("email") as HTMLInputElement).value.trim().toLowerCase();
     await new Promise((r) => setTimeout(r, 900));
+    try {
+      const prospects: { email: string; firstName: string; lastName: string; goal: string }[] =
+        JSON.parse(localStorage.getItem("bp_prospects") || "[]");
+      const user = prospects.find((p) => p.email === email);
+      if (user) {
+        localStorage.setItem("bp_current_user", JSON.stringify({ firstName: user.firstName, lastName: user.lastName, email: user.email, goal: user.goal }));
+      }
+    } catch { /* ignore */ }
     setLoading(false);
     window.location.href = "/dashboard";
   }
@@ -86,7 +95,7 @@ export default function LoginPage() {
             <div>
               <label style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.35)", display: "block", marginBottom: "0.4rem" }}>Email</label>
               <input
-                required type="email" placeholder="ton@email.com"
+                required type="email" name="email" placeholder="ton@email.com"
                 style={inputStyle("email")}
                 onFocus={() => setFocused("email")}
                 onBlur={() => setFocused(null)}

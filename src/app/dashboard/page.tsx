@@ -40,7 +40,7 @@ const glassAccent = (color: string): React.CSSProperties => ({
   ].join(", "),
 });
 
-const mockClient = { name: "Thomas", program: "Hypertrophie Intermédiaire", coach: "Baptiste P.", startDate: "11 Août 2025" };
+const mockClient = { program: "Hypertrophie Intermédiaire", coach: "Paul", startDate: "11 Août 2025" };
 
 const todaySession = {
   type: "Push",
@@ -170,9 +170,14 @@ export default function DashboardPage() {
   const [seancesWeek, setSeancesWeek] = useState(0);
   const [sessionDone, setSessionDone] = useState(false);
   const [streak, setStreak] = useState(0);
+  const [firstName, setFirstName] = useState("");
   const doneCount = checklist.filter(c => c.done).length;
 
   useEffect(() => {
+    try {
+      const user = JSON.parse(localStorage.getItem("bp_current_user") || "{}");
+      if (user.firstName) setFirstName(user.firstName);
+    } catch { /* ignore */ }
     const today = new Date().toISOString().slice(0, 10);
     const lastSession = localStorage.getItem("bp_lastSession");
     const savedStreak = parseInt(localStorage.getItem("bp_streak") || "0", 10);
@@ -303,7 +308,7 @@ export default function DashboardPage() {
             }}>
               BIENVENUE,{" "}
               <span style={{ color: "#38bdf8", textShadow: "0 0 50px rgba(56,189,248,0.5)" }}>
-                {mockClient.name.toUpperCase()}
+                {firstName ? firstName.toUpperCase() : "CHAMPION"}
               </span>
             </h1>
 
@@ -614,7 +619,7 @@ export default function DashboardPage() {
                   <span style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.18)" }}>Aujourd'hui</span>
                 </div>
                 <p style={{ fontSize: "0.73rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.65 }}>
-                  Bienvenue Thomas ! Ton programme est prêt. Commence par la séance Push aujourd'hui…
+                  Bienvenue {firstName || "!"} ! Ton programme est prêt. Commence par la séance Push aujourd&apos;hui…
                 </p>
               </div>
             </div>
