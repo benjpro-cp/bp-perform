@@ -66,14 +66,14 @@ export default function CoachSection() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 900));
+    await new Promise((r) => setTimeout(r, 700));
     try {
       const coaches = JSON.parse(localStorage.getItem("bp_coach_requests") || "[]");
       coaches.push({ ...form, createdAt: new Date().toISOString() });
       localStorage.setItem("bp_coach_requests", JSON.stringify(coaches));
     } catch { /* ignore */ }
     setLoading(false);
-    setSent(true);
+    window.location.href = "/rendez-vous";
   }
 
   return (
@@ -341,7 +341,7 @@ export default function CoachSection() {
                       />
                     </div>
                     <div>
-                      <label style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", display: "block", marginBottom: "0.38rem" }}>Votre activité <span style={{ color: "rgba(255,255,255,0.18)", fontWeight: 500 }}>(optionnel)</span></label>
+                      <label style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", display: "block", marginBottom: "0.38rem" }}>Votre activité</label>
                       <textarea
                         rows={3}
                         placeholder="Votre spécialité, nombre de clients, ce qui vous intéresse dans la plateforme…"
@@ -377,7 +377,7 @@ export default function CoachSection() {
                         transition: "box-shadow 0.2s, background 0.2s",
                       } as React.CSSProperties}
                     >
-                      {loading ? "Envoi en cours…" : <><Send size={14} /> Envoyer ma candidature</>}
+                      {loading ? "Chargement…" : <><Send size={14} /> Réserver un appel</>}
                     </motion.button>
                   </form>
 
