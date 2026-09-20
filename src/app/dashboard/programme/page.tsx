@@ -5,6 +5,7 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dumbbell, Clock, Zap, X, Target, ChevronRight, Play } from "lucide-react";
 import { HoverSpotlight } from "@/components/HoverSpotlight";
+import { PaywallGate } from "@/components/PaywallGate";
 
 const easing = [0.22, 1, 0.36, 1] as const;
 
@@ -272,6 +273,11 @@ export default function ProgrammePage() {
 
   return (
     <>
+      <PaywallGate
+        page="programme"
+        title="Ton programme t'attend"
+        description="Accède à ton programme complet — séances Push/Pull/Legs, exercices détaillés, vidéos et notes du coach. Débloque l'accès pour commencer dès aujourd'hui."
+      >
       <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
 
         {/* Header */}
@@ -374,6 +380,7 @@ export default function ProgrammePage() {
           ))}
         </div>
       </div>
+      </PaywallGate>
 
       {/* ── Session Modal ── */}
       <AnimatePresence>

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { motion, AnimatePresence } from "framer-motion";
-import { Dumbbell, TrendingUp, Calendar, ArrowRight, MessageCircle, CheckCircle2, Circle, Flame, Clock, Zap, CheckCheck } from "lucide-react";
+import { Dumbbell, TrendingUp, Calendar, ArrowRight, MessageCircle, CheckCircle2, Circle, Flame, Clock, Zap, CheckCheck, Lock } from "lucide-react";
 import { HoverSpotlight } from "@/components/HoverSpotlight";
 
 const easing = [0.22, 1, 0.36, 1] as const;
@@ -171,12 +171,14 @@ export default function DashboardPage() {
   const [sessionDone, setSessionDone] = useState(false);
   const [streak, setStreak] = useState(0);
   const [firstName, setFirstName] = useState("");
+  const [isPaid, setIsPaid] = useState(true);
   const doneCount = checklist.filter(c => c.done).length;
 
   useEffect(() => {
     try {
       const user = JSON.parse(localStorage.getItem("bp_current_user") || "{}");
       if (user.firstName) setFirstName(user.firstName);
+      setIsPaid(user.isPaid === true);
     } catch { /* ignore */ }
     const today = new Date().toISOString().slice(0, 10);
     const lastSession = localStorage.getItem("bp_lastSession");
@@ -313,12 +315,62 @@ export default function DashboardPage() {
             </h1>
 
             <p style={{ fontSize: "0.93rem", color: "rgba(255,255,255,0.42)", lineHeight: 1.6, maxWidth: "34rem" }}>
-              Ton programme <span style={{ color: "rgba(255,255,255,0.7)" }}>{mockClient.program}</span> est prêt.
-              Suivi par <span style={{ color: "rgba(255,255,255,0.7)" }}>{mockClient.coach}</span>. Ta première séance t'attend.
+              {isPaid
+                ? <>Ton programme <span style={{ color: "rgba(255,255,255,0.7)" }}>{mockClient.program}</span> est prêt. Suivi par <span style={{ color: "rgba(255,255,255,0.7)" }}>{mockClient.coach}</span>. Ta première séance t&apos;attend.</>
+                : <>Ton programme sera créé par <span style={{ color: "rgba(255,255,255,0.7)" }}>{mockClient.coach}</span> une fois ton paiement confirmé.</>
+              }
             </p>
           </div>
         </HoverSpotlight>
       </motion.div>
+
+      {/* ── Upsell banner (unpaid) ── */}
+      {!isPaid && (
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: easing, delay: 0.15 }}
+        >
+          <Link
+            href="/#pricing"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              gap: "1rem",
+              flexWrap: "wrap",
+              background: "linear-gradient(135deg, rgba(56,189,248,0.1) 0%, rgba(56,189,248,0.04) 100%)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+              border: "1px solid rgba(56,189,248,0.25)",
+              borderRadius: "1.1rem",
+              padding: "1.1rem 1.5rem",
+              textDecoration: "none",
+              boxShadow: "inset 0 1px 0 rgba(56,189,248,0.2), 0 4px 20px rgba(56,189,248,0.06)",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(56,189,248,0.45)"; el.style.boxShadow = "inset 0 1px 0 rgba(56,189,248,0.25), 0 4px 24px rgba(56,189,248,0.12)"; }}
+            onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.borderColor = "rgba(56,189,248,0.25)"; el.style.boxShadow = "inset 0 1px 0 rgba(56,189,248,0.2), 0 4px 20px rgba(56,189,248,0.06)"; }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "0.85rem" }}>
+              <div style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(56,189,248,0.12)", border: "1px solid rgba(56,189,248,0.28)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <Lock size={15} color="#38bdf8" />
+              </div>
+              <div>
+                <p style={{ fontSize: "0.84rem", fontWeight: 700, color: "#ffffff", lineHeight: 1, marginBottom: "0.2rem" }}>
+                  Ton programme et ta diète sont prêts
+                </p>
+                <p style={{ fontSize: "0.76rem", color: "rgba(255,255,255,0.38)", lineHeight: 1 }}>
+                  Débloque l'accès complet — 69€/mois · Sans engagement
+                </p>
+              </div>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", background: "linear-gradient(135deg, #38bdf8, #0ea5e9)", color: "#03090f", fontWeight: 800, fontSize: "0.76rem", letterSpacing: "0.1em", textTransform: "uppercase", padding: "0.55rem 1.1rem", borderRadius: "999px", flexShrink: 0, boxShadow: "0 2px 12px rgba(56,189,248,0.35)" }}>
+              Commencer <ArrowRight size={12} />
+            </div>
+          </Link>
+        </motion.div>
+      )}
 
       {/* ── Stats ── */}
       <div id="tour-dash-stats" style={{ display: "grid", gridTemplateColumns: isMobile ? "repeat(2, 1fr)" : "repeat(4, 1fr)", gap: "0.85rem" }}>
@@ -359,6 +411,29 @@ export default function DashboardPage() {
             pointerEvents: "none",
           }} />
 
+          {!isPaid ? (
+            /* ── Programme pending (unpaid) ── */
+            <div style={{ padding: "2.5rem 1.75rem", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", gap: "1rem", minHeight: "220px" }}>
+              <div style={{ width: 52, height: 52, borderRadius: "50%", background: "rgba(56,189,248,0.08)", border: "1px solid rgba(56,189,248,0.2)", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 24px rgba(56,189,248,0.12)" }}>
+                <Lock size={22} color="#38bdf8" />
+              </div>
+              <div>
+                <h2 style={{ fontFamily: "var(--font-oswald)", fontWeight: 700, fontSize: "1.35rem", textTransform: "uppercase", color: "#ffffff", lineHeight: 1.1, marginBottom: "0.5rem" }}>
+                  Programme en attente
+                </h2>
+                <p style={{ fontSize: "0.88rem", color: "rgba(255,255,255,0.38)", lineHeight: 1.65, maxWidth: "26rem" }}>
+                  Ton programme sera créé une fois le paiement réalisé.
+                </p>
+              </div>
+              <Link
+                href="/#pricing"
+                style={{ display: "inline-flex", alignItems: "center", gap: "0.45rem", background: "linear-gradient(135deg, #38bdf8, #0ea5e9)", color: "#03090f", fontWeight: 800, fontSize: "0.76rem", letterSpacing: "0.12em", textTransform: "uppercase", padding: "0.7rem 1.5rem", borderRadius: "999px", textDecoration: "none", boxShadow: "0 4px 20px rgba(56,189,248,0.4), inset 0 1px 0 rgba(255,255,255,0.3)", marginTop: "0.25rem" }}
+              >
+                Démarrer à 69€/mois <ArrowRight size={12} />
+              </Link>
+            </div>
+          ) : (
+            <>
           {/* Session header */}
           <div style={{ padding: "1.6rem 1.75rem 1.25rem", display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
             <div>
@@ -491,6 +566,8 @@ export default function DashboardPage() {
               )}
             </AnimatePresence>
           </div>
+            </>
+          )}
         </HoverSpotlight>
         </motion.div>
 
@@ -619,7 +696,10 @@ export default function DashboardPage() {
                   <span style={{ fontSize: "0.68rem", color: "rgba(255,255,255,0.18)" }}>Aujourd'hui</span>
                 </div>
                 <p style={{ fontSize: "0.73rem", color: "rgba(255,255,255,0.45)", lineHeight: 1.65 }}>
-                  Bienvenue {firstName || "!"} ! Ton programme est prêt. Commence par la séance Push aujourd&apos;hui…
+                  {isPaid
+                    ? <>Bienvenue {firstName || "!"} ! Ton programme est prêt. Commence par la séance Push aujourd&apos;hui…</>
+                    : <>Bienvenue {firstName || "!"} ! Dès que ton paiement est confirmé, je crée ton programme personnalisé et tu peux démarrer.</>
+                  }
                 </p>
               </div>
             </div>

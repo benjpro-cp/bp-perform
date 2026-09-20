@@ -6,6 +6,7 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { TrendingUp, TrendingDown, Trophy, Pencil, Check, Scale, Plus, X } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, ReferenceLine } from "recharts";
 import { HoverSpotlight } from "@/components/HoverSpotlight";
+import { PaywallGate } from "@/components/PaywallGate";
 
 const easing = [0.22, 1, 0.36, 1] as const;
 
@@ -265,6 +266,11 @@ export default function ProgressionPage() {
 
   // ── Render ─────────────────────────────────────────────────────────────────
   return (
+    <PaywallGate
+      page="progression"
+      title="Suis ta progression"
+      description="Courbe de poids, mesures corporelles, PRs sur tes exercices — tout est enregistré semaine après semaine. Débloque l'accès pour commencer ton suivi."
+    >
     <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
 
       {/* Header */}
@@ -640,5 +646,6 @@ export default function ProgressionPage() {
       </motion.div>
 
     </div>
+    </PaywallGate>
   );
 }

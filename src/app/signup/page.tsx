@@ -49,13 +49,13 @@ export default function SignupPage() {
       try {
         const prospects = JSON.parse(localStorage.getItem("bp_prospects") || "[]");
         const already = prospects.find((p: { email: string }) => p.email.toLowerCase() === form.email.toLowerCase());
-        const userData = { firstName: form.firstName.trim(), lastName: form.lastName.trim(), email: form.email.trim().toLowerCase(), goal: form.goal };
+        const userData = { firstName: form.firstName.trim(), lastName: form.lastName.trim(), email: form.email.trim().toLowerCase(), goal: form.goal, isPaid: false };
         if (!already) {
           prospects.push({ id: genId(), ...userData, phone: form.phone.trim(), status: "email", createdAt: new Date().toISOString() });
           localStorage.setItem("bp_prospects", JSON.stringify(prospects));
         }
         localStorage.setItem("bp_current_user", JSON.stringify(userData));
-        setDone(true);
+        window.location.href = "/dashboard";
       } catch { setError("Une erreur est survenue."); }
       setLoading(false);
     }, 700);
@@ -239,7 +239,7 @@ export default function SignupPage() {
                       <motion.button type="submit" disabled={loading} whileTap={!loading ? { scale: 0.98 } : {}}
                         style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", padding: "0.95rem", background: loading ? "rgba(56,189,248,0.3)" : "linear-gradient(135deg, #38bdf8, #0ea5e9)", color: "#03090f", fontWeight: 800, fontSize: "0.88rem", letterSpacing: "0.1em", textTransform: "uppercase", border: "none", borderRadius: "0.85rem", cursor: loading ? "not-allowed" : "pointer", marginTop: "0.25rem", boxShadow: loading ? "none" : "0 4px 24px rgba(56,189,248,0.35), inset 0 1px 0 rgba(255,255,255,0.3)", transition: "all 0.2s" }}
                       >
-                        {loading ? "Envoi…" : <><span>Envoyer ma demande</span><ArrowRight size={15} /></>}
+                        {loading ? "Inscription…" : <><span>S&apos;inscrire</span><ArrowRight size={15} /></>}
                       </motion.button>
                     </form>
 

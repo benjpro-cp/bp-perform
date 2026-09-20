@@ -14,11 +14,23 @@ const links = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userFirstName, setUserFirstName] = useState("");
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    try {
+      const user = JSON.parse(localStorage.getItem("bp_current_user") || "{}");
+      if (user.firstName) {
+        setLoggedIn(true);
+        setUserFirstName(user.firstName.trim());
+      }
+    } catch { /* ignore */ }
   }, []);
 
   return (
@@ -67,29 +79,54 @@ export default function Navbar() {
 
           {/* Right: CTAs */}
           <div className="hidden md:flex" style={{ alignItems: "center", gap: "1.25rem" }}>
-            <Link href="/login" style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.72)", textDecoration: "none", transition: "color 0.15s", whiteSpace: "nowrap" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#ffffff")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.72)")}
-            >
-              Connexion
-            </Link>
-            <a href="/#contact" style={{
-              display: "inline-flex", alignItems: "center", gap: "0.4rem", flexShrink: 0,
-              background: "linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%)",
-              color: "#03090f", fontSize: "0.62rem", fontWeight: 800,
-              letterSpacing: "0.13em", textTransform: "uppercase",
-              padding: "0.48rem 1.1rem", borderRadius: "9999px", textDecoration: "none",
-              boxShadow: "0 0 0 1px rgba(56,189,248,0.35), 0 4px 18px rgba(56,189,248,0.35), inset 0 1px 0 rgba(255,255,255,0.3)",
-              transition: "all 0.18s ease", whiteSpace: "nowrap",
-            }}
-              onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 0 0 1px rgba(56,189,248,0.55), 0 6px 26px rgba(56,189,248,0.5), inset 0 1px 0 rgba(255,255,255,0.3)"; el.style.transform = "translateY(-1px)"; }}
-              onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 0 0 1px rgba(56,189,248,0.35), 0 4px 18px rgba(56,189,248,0.35), inset 0 1px 0 rgba(255,255,255,0.3)"; el.style.transform = ""; }}
-            >
-              Rejoindre
-              <svg width="11" height="11" viewBox="0 0 11 11" fill="none" style={{ flexShrink: 0 }}>
-                <path d="M2 5.5H9M9 5.5L6 2.5M9 5.5L6 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </a>
+            {loggedIn ? (
+              <Link href="/dashboard" style={{
+                display: "inline-flex", alignItems: "center", gap: "0.5rem", flexShrink: 0,
+                background: "linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%)",
+                color: "#03090f", fontSize: "0.62rem", fontWeight: 800,
+                letterSpacing: "0.13em", textTransform: "uppercase",
+                padding: "0.48rem 1.1rem", borderRadius: "9999px", textDecoration: "none",
+                boxShadow: "0 0 0 1px rgba(56,189,248,0.35), 0 4px 18px rgba(56,189,248,0.35), inset 0 1px 0 rgba(255,255,255,0.3)",
+                transition: "all 0.18s ease", whiteSpace: "nowrap",
+              }}
+                onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 0 0 1px rgba(56,189,248,0.55), 0 6px 26px rgba(56,189,248,0.5), inset 0 1px 0 rgba(255,255,255,0.3)"; el.style.transform = "translateY(-1px)"; }}
+                onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 0 0 1px rgba(56,189,248,0.35), 0 4px 18px rgba(56,189,248,0.35), inset 0 1px 0 rgba(255,255,255,0.3)"; el.style.transform = ""; }}
+              >
+                <span style={{ width: 18, height: 18, borderRadius: "50%", background: "rgba(3,9,15,0.25)", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "0.55rem", fontWeight: 900, letterSpacing: 0 }}>
+                  {userFirstName.charAt(0).toUpperCase()}
+                </span>
+                Mon espace
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" style={{ flexShrink: 0 }}>
+                  <path d="M2 5.5H9M9 5.5L6 2.5M9 5.5L6 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </Link>
+            ) : (
+              <>
+                <Link href="/login" style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.72)", textDecoration: "none", transition: "color 0.15s", whiteSpace: "nowrap" }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#ffffff")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "rgba(255,255,255,0.72)")}
+                >
+                  Connexion
+                </Link>
+                <a href="/#contact" style={{
+                  display: "inline-flex", alignItems: "center", gap: "0.4rem", flexShrink: 0,
+                  background: "linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%)",
+                  color: "#03090f", fontSize: "0.62rem", fontWeight: 800,
+                  letterSpacing: "0.13em", textTransform: "uppercase",
+                  padding: "0.48rem 1.1rem", borderRadius: "9999px", textDecoration: "none",
+                  boxShadow: "0 0 0 1px rgba(56,189,248,0.35), 0 4px 18px rgba(56,189,248,0.35), inset 0 1px 0 rgba(255,255,255,0.3)",
+                  transition: "all 0.18s ease", whiteSpace: "nowrap",
+                }}
+                  onMouseEnter={(e) => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 0 0 1px rgba(56,189,248,0.55), 0 6px 26px rgba(56,189,248,0.5), inset 0 1px 0 rgba(255,255,255,0.3)"; el.style.transform = "translateY(-1px)"; }}
+                  onMouseLeave={(e) => { const el = e.currentTarget as HTMLElement; el.style.boxShadow = "0 0 0 1px rgba(56,189,248,0.35), 0 4px 18px rgba(56,189,248,0.35), inset 0 1px 0 rgba(255,255,255,0.3)"; el.style.transform = ""; }}
+                >
+                  Rejoindre
+                  <svg width="11" height="11" viewBox="0 0 11 11" fill="none" style={{ flexShrink: 0 }}>
+                    <path d="M2 5.5H9M9 5.5L6 2.5M9 5.5L6 8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+              </>
+            )}
           </div>
 
           {/* Mobile toggle */}
@@ -120,24 +157,46 @@ export default function Navbar() {
                 {l.label}
               </Link>
             ))}
-            <a
-              href="/#contact"
-              onClick={() => setOpen(false)}
-              style={{
-                background: "#38bdf8",
-                color: "#070c16",
-                fontSize: "0.72rem",
-                fontWeight: 700,
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                padding: "0.75rem 1.25rem",
-                textAlign: "center",
-                borderRadius: "9999px",
-                textDecoration: "none",
-              }}
-            >
-              Rejoindre
-            </a>
+            {loggedIn ? (
+              <Link
+                href="/dashboard"
+                onClick={() => setOpen(false)}
+                style={{
+                  background: "#38bdf8",
+                  color: "#070c16",
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  padding: "0.75rem 1.25rem",
+                  textAlign: "center",
+                  borderRadius: "9999px",
+                  textDecoration: "none",
+                  display: "block",
+                }}
+              >
+                Mon espace →
+              </Link>
+            ) : (
+              <a
+                href="/#contact"
+                onClick={() => setOpen(false)}
+                style={{
+                  background: "#38bdf8",
+                  color: "#070c16",
+                  fontSize: "0.72rem",
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  padding: "0.75rem 1.25rem",
+                  textAlign: "center",
+                  borderRadius: "9999px",
+                  textDecoration: "none",
+                }}
+              >
+                Rejoindre
+              </a>
+            )}
           </div>
         )}
       </header>

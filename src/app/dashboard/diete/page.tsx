@@ -5,6 +5,7 @@ import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { motion } from "framer-motion";
 import { Flame, Beef, Wheat, Droplets, Info, ExternalLink, Smartphone, ScanLine, BarChart3, ChefHat } from "lucide-react";
 import { HoverSpotlight } from "@/components/HoverSpotlight";
+import { PaywallGate } from "@/components/PaywallGate";
 
 const easing = [0.22, 1, 0.36, 1] as const;
 
@@ -165,6 +166,11 @@ export default function DietePage() {
   const { isMobile } = useBreakpoint();
 
   return (
+    <PaywallGate
+      page="diete"
+      title="Ton plan alimentaire est prêt"
+      description="Macros personnalisées, répartition calorique, sources alimentaires et notes du coach — tout est calibré sur tes objectifs. Débloque l'accès pour voir ton plan."
+    >
     <div style={{ display: "flex", flexDirection: "column", gap: "1.75rem" }}>
 
       {/* Header */}
@@ -417,5 +423,6 @@ export default function DietePage() {
       </motion.div>
 
     </div>
+    </PaywallGate>
   );
 }
