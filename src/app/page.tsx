@@ -6,6 +6,7 @@ import ProgramsSection from "@/components/ProgramsSection";
 import TransformationsSection from "@/components/TransformationsSection";
 import PricingSection from "@/components/PricingSection";
 import ContactSection from "@/components/ContactSection";
+import CoachSection from "@/components/CoachSection";
 import Footer from "@/components/Footer";
 import WelcomeModal from "@/components/WelcomeModal";
 
@@ -22,6 +23,7 @@ export default function Home() {
         <TransformationsSection />
         <PricingSection />
         <ContactSection />
+        <CoachSection />
       </main>
       <Footer />
     </>
