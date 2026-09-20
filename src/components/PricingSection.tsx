@@ -2,12 +2,10 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { Check, Zap, ArrowRight, Lock } from "lucide-react";
+import { Check, Zap, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { HoverSpotlight } from "@/components/HoverSpotlight";
 
-const SPOTS_TOTAL = 3;
-const SPOTS_TAKEN = 0;
 const B = "#38bdf8";
 const easing = [0.22, 1, 0.36, 1] as const;
 
@@ -69,7 +67,7 @@ export default function PricingSection() {
         @keyframes orb-1 { 0%,100%{transform:translate(0,0)} 40%{transform:translate(40px,-35px)} 70%{transform:translate(-20px,-55px)} }
         @keyframes orb-2 { 0%,100%{transform:translate(0,0)} 35%{transform:translate(-35px,30px)} 65%{transform:translate(30px,-20px)} }
         @keyframes breathe { 0%,100%{opacity:.65} 50%{opacity:1} }
-        @keyframes pulse-ring { 0%,100%{box-shadow:0 0 0 0 ${B}55,0 0 8px ${B}90} 60%{box-shadow:0 0 0 5px ${B}00,0 0 16px ${B}} }
+
       `}</style>
 
       {/* Floating orbs */}
@@ -182,54 +180,6 @@ export default function PricingSection() {
                   <span style={{ display:"inline-block", background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.1)", borderRadius:"9999px", padding:"0.3rem 1rem", fontSize:"0.72rem", fontWeight:600, letterSpacing:"0.14em", textTransform:"uppercase", color:"rgba(255,255,255,0.45)" }}>
                     Paiement unique
                   </span>
-                </div>
-
-                {/* 3 Spots */}
-                <div style={{ marginBottom:"2.75rem" }}>
-                  <p style={{ fontSize:"0.62rem", fontWeight:700, letterSpacing:"0.22em", textTransform:"uppercase", color:"rgba(255,255,255,0.22)", textAlign:"center", marginBottom:"1rem" }}>
-                    Places au tarif de lancement
-                  </p>
-                  <div style={{ display:"flex", gap:"0.75rem" }}>
-                    {Array.from({ length: SPOTS_TOTAL }).map((_, i) => {
-                      const taken = i < SPOTS_TAKEN;
-                      return (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity:0, scale:0.75 }}
-                          whileInView={{ opacity:1, scale:1 }}
-                          viewport={{ once:true }}
-                          transition={{ duration:0.45, ease:easing, delay:0.4 + i * 0.1 }}
-                          style={{
-                            flex:1, padding:"1.1rem 0.75rem",
-                            background: taken ? "rgba(255,255,255,0.02)" : `${B}0d`,
-                            border:`1px solid ${taken ? "rgba(255,255,255,0.07)" : `${B}30`}`,
-                            borderRadius:"1.1rem",
-                            display:"flex", flexDirection:"column", alignItems:"center", gap:"0.6rem",
-                            position:"relative", overflow:"hidden",
-                          }}
-                        >
-                          {!taken && (
-                            <div aria-hidden style={{ position:"absolute", top:0, left:"10%", right:"10%", height:"1px", background:`linear-gradient(to right, transparent, ${B}65, transparent)` }} />
-                          )}
-                          <div style={{
-                            width:34, height:34, borderRadius:"50%",
-                            background: taken ? "rgba(255,255,255,0.04)" : `${B}18`,
-                            border:`2px solid ${taken ? "rgba(255,255,255,0.1)" : B}`,
-                            display:"flex", alignItems:"center", justifyContent:"center",
-                            animation: taken ? "none" : "pulse-ring 2.4s ease-in-out infinite",
-                          }}>
-                            {taken
-                              ? <Lock size={13} style={{ color:"rgba(255,255,255,0.18)" }} />
-                              : <div style={{ width:9, height:9, borderRadius:"50%", background:B, boxShadow:`0 0 6px ${B}` }} />
-                            }
-                          </div>
-                          <span style={{ fontSize:"0.6rem", fontWeight:700, textTransform:"uppercase", letterSpacing:"0.12em", color: taken ? "rgba(255,255,255,0.16)" : "rgba(255,255,255,0.6)" }}>
-                            {taken ? "Réservée" : "Libre"}
-                          </span>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
                 </div>
 
                 {/* Divider */}
