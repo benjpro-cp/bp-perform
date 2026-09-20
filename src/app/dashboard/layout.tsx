@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { LayoutDashboard, Dumbbell, TrendingUp, MessageCircle, BookOpen, Utensils, LogOut, ChevronRight, Zap, Menu, X, Users } from "lucide-react";
+import { LayoutDashboard, Dumbbell, TrendingUp, MessageCircle, BookOpen, Utensils, LogOut, ChevronRight, Zap, Menu, X, Users, Headphones } from "lucide-react";
 import { useBreakpoint } from "@/hooks/useBreakpoint";
 import { OnboardingTour } from "@/components/OnboardingTour";
 
@@ -24,6 +24,7 @@ const navGroups: { label: string; links: NavLink[] }[] = [
     links: [
       { href: "/dashboard/messages", label: "Messages", icon: MessageCircle },
       { href: "/dashboard/exercises", label: "Exercices", icon: BookOpen },
+      { href: "/dashboard/musique", label: "Musique", icon: Headphones },
       { href: "/dashboard/communaute", label: "Communauté", icon: Users, soon: true },
     ],
   },
