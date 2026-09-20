@@ -12,7 +12,7 @@ const easing = [0.22, 1, 0.36, 1] as const;
 const INCLUS = [
   "Programme nutrition sur mesure",
   "Plan entraînement personnalisé",
-  "Suivi & ajustements sur 3 mois",
+  "Suivi & ajustements",
   "Messagerie directe 7j/7",
   "Espace client BP Perform",
 ];
@@ -67,6 +67,7 @@ export default function PricingSection() {
         @keyframes orb-1 { 0%,100%{transform:translate(0,0)} 40%{transform:translate(40px,-35px)} 70%{transform:translate(-20px,-55px)} }
         @keyframes orb-2 { 0%,100%{transform:translate(0,0)} 35%{transform:translate(-35px,30px)} 65%{transform:translate(30px,-20px)} }
         @keyframes breathe { 0%,100%{opacity:.65} 50%{opacity:1} }
+        @keyframes pulse-red { 0%,100%{box-shadow:0 0 0 0 rgba(248,113,113,0.5),0 0 6px rgba(248,113,113,0.6)} 60%{box-shadow:0 0 0 6px rgba(248,113,113,0),0 0 14px rgba(248,113,113,0.9)} }
 
       `}</style>
 
@@ -180,6 +181,17 @@ export default function PricingSection() {
                   <span style={{ display:"inline-block", background:"rgba(255,255,255,0.05)", border:"1px solid rgba(255,255,255,0.1)", borderRadius:"9999px", padding:"0.3rem 1rem", fontSize:"0.72rem", fontWeight:600, letterSpacing:"0.14em", textTransform:"uppercase", color:"rgba(255,255,255,0.45)" }}>
                     Paiement unique
                   </span>
+                </div>
+
+                {/* Scarcity block */}
+                <div style={{ marginBottom:"2rem", display:"flex", flexDirection:"column", alignItems:"center", gap:"0.6rem" }}>
+                  <div style={{ display:"inline-flex", alignItems:"center", gap:"0.6rem", background:"rgba(248,113,113,0.08)", border:"1px solid rgba(248,113,113,0.3)", borderRadius:"9999px", padding:"0.45rem 1.1rem" }}>
+                    <div style={{ width:9, height:9, borderRadius:"50%", background:"#f87171", flexShrink:0, animation:"pulse-red 2s ease-in-out infinite" }} />
+                    <span style={{ fontSize:"0.75rem", fontWeight:800, letterSpacing:"0.08em", color:"#f87171", whiteSpace:"nowrap" }}>Il ne reste que 2 places</span>
+                  </div>
+                  <p style={{ fontSize:"0.72rem", color:"rgba(255,255,255,0.3)", textAlign:"center" }}>
+                    Ce tarif est uniquement pour les 3 premiers clients.
+                  </p>
                 </div>
 
                 {/* Divider */}
