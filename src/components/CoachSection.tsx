@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Zap, BarChart3, Users, ArrowRight, Check, Send, CheckCircle2, Layers, MessageCircle } from "lucide-react";
+import { HoverSpotlight } from "@/components/HoverSpotlight";
 
 const easing = [0.22, 1, 0.36, 1] as const;
 const G = "#fbbf24";
@@ -149,6 +150,9 @@ export default function CoachSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, ease: easing, delay: i * 0.1 }}
+              >
+              <HoverSpotlight
+                color={G}
                 style={{
                   background: `linear-gradient(145deg, ${G}0c 0%, rgba(255,255,255,0.03) 55%, ${G}06 100%)`,
                   backdropFilter: "blur(28px) saturate(180%)",
@@ -188,6 +192,7 @@ export default function CoachSection() {
                     {p.desc}
                   </p>
                 </div>
+              </HoverSpotlight>
               </motion.div>
             );
           })}
@@ -260,17 +265,20 @@ export default function CoachSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: easing, delay: 0.1 }}
           >
-            <div style={{
-              background: `linear-gradient(145deg, ${G}0e 0%, rgba(6,11,20,0.99) 45%)`,
-              backdropFilter: "blur(40px) saturate(180%)",
-              WebkitBackdropFilter: "blur(40px) saturate(180%)",
-              border: `1px solid ${G}28`,
-              borderRadius: "1.75rem",
-              padding: "2.5rem 2.25rem",
-              position: "relative",
-              overflow: "hidden",
-              boxShadow: [`0 32px 80px rgba(0,0,0,0.6)`, `0 0 60px ${G}0c`, `inset 0 1px 0 ${G}25`].join(", "),
-            }}>
+            <HoverSpotlight
+              color={G}
+              style={{
+                background: `linear-gradient(145deg, ${G}0e 0%, rgba(6,11,20,0.99) 45%)`,
+                backdropFilter: "blur(40px) saturate(180%)",
+                WebkitBackdropFilter: "blur(40px) saturate(180%)",
+                border: `1px solid ${G}28`,
+                borderRadius: "1.75rem",
+                padding: "2.5rem 2.25rem",
+                position: "relative",
+                overflow: "hidden",
+                boxShadow: [`0 32px 80px rgba(0,0,0,0.6)`, `0 0 60px ${G}0c`, `inset 0 1px 0 ${G}25`].join(", "),
+              }}
+            >
               {/* Top accent line */}
               <div style={{ position: "absolute", top: 0, left: "5%", right: "5%", height: "1px", background: `linear-gradient(to right, transparent, ${G}70, rgba(255,255,255,0.35), ${G}70, transparent)` }} />
               {/* Ambient */}
@@ -383,7 +391,7 @@ export default function CoachSection() {
                   </div>
                 </>
               )}
-            </div>
+            </HoverSpotlight>
           </motion.div>
         </div>
       </div>
